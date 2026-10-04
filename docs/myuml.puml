@@ -1,0 +1,56 @@
+@startuml Roomtrack Use Case
+left to right direction
+
+actor "Студент" as Student
+actor "комендант общежития" as Commandant
+rectangle "Roomtrack Use Case"{
+    usecase "Регистрация" as UC_register
+    usecase "Вход в систему" as UC_LoginStudent
+    usecase "Вход в систему" as UC_LoginCommandant
+
+    usecase "Меню студентов" as UC_students
+    usecase "Меню комнат" as UC_rooms
+    usecase "Меню заявок" as UC_request
+    usecase "Добавление коменданта" as UC_CreateCommandant
+
+    usecase "Просмотр студента" as UC_studentcard
+    usecase "Выселение студента" as UC_eviction
+
+    usecase "Добавление комнаты" as UC_addroom
+    usecase "Удаление комнаты" as UC_deleteroom
+    usecase "Просмотр всех комнат" as UC_roomlist
+    usecase "Изменение статуса комнаты" as UC_roomstatus
+
+    usecase "Принять заявку" as UC_approve
+    usecase "Отклонить заявку" as UC_decline
+
+    usecase "Подать заявку на заселение" as UC_checkinrequest
+    usecase "Подать заявку на выселение" as UC_evictionrequest
+    usecase "Посмотреть номер комнаты проживания" as UC_roomnum
+}
+Student -- UC_register
+Student -- UC_LoginStudent
+
+Commandant -- UC_LoginCommandant
+
+UC_LoginStudent -- UC_checkinrequest
+UC_LoginStudent -- UC_evictionrequest
+UC_LoginStudent -- UC_roomnum
+
+UC_LoginCommandant -- UC_students
+UC_LoginCommandant -- UC_CreateCommandant
+UC_LoginCommandant -- UC_rooms
+UC_LoginCommandant -- UC_request
+
+UC_students -- UC_studentcard
+
+UC_rooms -- UC_addroom
+UC_rooms -- UC_deleteroom
+UC_rooms -- UC_roomlist
+
+UC_request -- UC_approve
+UC_request -- UC_decline
+UC_studentcard -- UC_eviction
+UC_roomlist ..> UC_roomstatus : <<include>>
+
+@enduml
